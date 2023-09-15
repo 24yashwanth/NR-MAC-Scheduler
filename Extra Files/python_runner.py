@@ -92,16 +92,16 @@ dimensionModel = [32, 64, 128]
 numberOfAttentionHeads = [4, 8]
 feedForwardDimension = [16, 32, 64]
 dropOutRate = [0.1, 0.01, 0.02, 0.03, 0.2, 0.4, 0.6, 0.8, 0.9]
-lossRate = [0.5, 0.1]
+lossRate = [0.5, 0.1, 0.01, 0.001]
 
-n_steps = [10]
-numberOfEpochs = [60]
-numberOfBlocks = [4]
-dimensionModel = [128]
-numberOfAttentionHeads = [4]
-feedForwardDimension = [32]
-dropOutRate = [0.01]
-lossRate = [0.5]
+# n_steps = [10]
+# numberOfEpochs = [60]
+# numberOfBlocks = [4]
+# dimensionModel = [128]
+# numberOfAttentionHeads = [4]
+# feedForwardDimension = [32]
+# dropOutRate = [0.01]
+# lossRate = [0.5]
 
 for nstep in n_steps:
     for numepochs in numberOfEpochs:
@@ -176,19 +176,3 @@ for nstep in n_steps:
                                 plt.figtext(.4, .4, '''n_steps={}\nnum_epochs={}\nnum_blocks={}\nd_model={}\nnum_heads={}\nff_dim={}\ndropout_rate={}\nlr={}'''.format(nstep, num_epochs, num_blocks, d_model, num_heads, ff_dim, dropout_rate, lr) )
                                 # Saving the plot
                                 plt.savefig('''./Figures/n_steps={},num_epochs={}, num_blocks={}, d_model={}, num_heads={}, ff_dim={}, dropout_rate={}, lr={}.png'''.format(nstep, num_epochs, num_blocks, d_model, num_heads, ff_dim, dropout_rate, lr))
-
-
-
-                              
-
-
-# cmd = '''python3 transformers.py --n_steps={} --num_epochs={}
-#                                   --num_blocks={} --d_model={} --num_heads={} --ff_dim={}
-#                                     --dropout_rate={} --lr={}'''.format(n_step, num_epochs, num_blocks, d_model, num_heads, ff_dim, dropout_rate, lr)
-# os.system(cmd)
-# cmd = '''python3 transformers.py --n_steps={} --num_epochs={}
-#                                   --num_blocks={} --d_model={} --num_heads={} --ff_dim={}
-#                                     --dropout_rate={} --lr={}'''.format(30 , 150, 2, 32, 4, 16, 0.01, 0.001)
-# os.system(cmd)
-
-
