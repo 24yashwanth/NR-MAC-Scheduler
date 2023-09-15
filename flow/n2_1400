@@ -1,0 +1,144 @@
+Before Prediction:
+
+Flow 1 (7.0.0.2:49153 -> 1.0.0.2:20001) proto UDP
+  Tx Packets: 2500
+  Tx Bytes:   3570000
+  TxOffered:  6.208696 Mbps
+  Rx Bytes:   3554292
+  Throughput: 5.688078 Mbps
+  Mean delay:  5.004647 ms
+  Mean jitter:  0.103082 ms
+  Rx Packets: 2489
+ Loss Rate: 0.440000
+
+Flow 2 (7.0.0.3:49153 -> 1.0.0.2:20002) proto UDP
+  Tx Packets: 2500
+  Tx Bytes:   3570000
+  TxOffered:  6.208696 Mbps
+  Rx Bytes:   3554292
+  Throughput: 5.687814 Mbps
+  Mean delay:  5.063958 ms
+  Mean jitter:  0.133738 ms
+  Rx Packets: 2489
+ Loss Rate: 0.440000
+
+Flow 3 (7.0.0.4:49153 -> 1.0.0.2:20003) proto UDP
+  Tx Packets: 2500
+  Tx Bytes:   3570000
+  TxOffered:  6.208696 Mbps
+  Rx Bytes:   3554292
+  Throughput: 5.688180 Mbps
+  Mean delay:  5.135581 ms
+  Mean jitter:  0.191191 ms
+  Rx Packets: 2489
+ Loss Rate: 0.440000
+
+Flow 4 (7.0.0.5:49153 -> 1.0.0.2:20004) proto UDP
+  Tx Packets: 2500
+  Tx Bytes:   3570000
+  TxOffered:  6.208696 Mbps
+  Rx Bytes:   3554292
+  Throughput: 5.688261 Mbps
+  Mean delay:  5.053190 ms
+  Mean jitter:  0.178392 ms
+  Rx Packets: 2489
+ Loss Rate: 0.440000
+
+Flow 5 (7.0.0.6:49153 -> 1.0.0.2:20005) proto UDP
+  Tx Packets: 2500
+  Tx Bytes:   3570000
+  TxOffered:  6.208696 Mbps
+  Rx Bytes:   3554292
+  Throughput: 5.688017 Mbps
+  Mean delay:  5.105406 ms
+  Mean jitter:  0.232781 ms
+  Rx Packets: 2489
+ Loss Rate: 0.440000
+
+
+  Mean flow throughput: 5.688070
+
+
+  Aggregrate throughput: 28.440350
+
+
+  Mean flow delay: 5.072556
+
+
+  Mean packet loss rate(%): 0.440000
+
+  Mean HOL Delay: 2.0365
+
+========================================================================
+After Prediction:
+
+Flow 1 (7.0.0.2:49153 -> 1.0.0.2:20001) proto UDP
+  Tx Packets: 2500
+  Tx Bytes:   3570000
+  TxOffered:  6.208696 Mbps
+  Rx Bytes:   3554292
+  Throughput: 5.688078 Mbps
+  Mean delay:  5.032498 ms
+  Mean jitter:  0.087600 ms
+  Rx Packets: 2489
+ Loss Rate: 0.440000
+
+Flow 2 (7.0.0.3:49153 -> 1.0.0.2:20002) proto UDP
+  Tx Packets: 2500
+  Tx Bytes:   3570000
+  TxOffered:  6.208696 Mbps
+  Rx Bytes:   3554292
+  Throughput: 5.688139 Mbps
+  Mean delay:  5.401077 ms
+  Mean jitter:  0.268539 ms
+  Rx Packets: 2489
+ Loss Rate: 0.440000
+
+Flow 3 (7.0.0.4:49153 -> 1.0.0.2:20003) proto UDP
+  Tx Packets: 2500
+  Tx Bytes:   3570000
+  TxOffered:  6.208696 Mbps
+  Rx Bytes:   3554292
+  Throughput: 5.688180 Mbps
+  Mean delay:  5.099321 ms
+  Mean jitter:  0.175293 ms
+  Rx Packets: 2489
+ Loss Rate: 0.440000
+
+Flow 4 (7.0.0.5:49153 -> 1.0.0.2:20004) proto UDP
+  Tx Packets: 2500
+  Tx Bytes:   3570000
+  TxOffered:  6.208696 Mbps
+  Rx Bytes:   3554292
+  Throughput: 5.688241 Mbps
+  Mean delay:  5.049926 ms
+  Mean jitter:  0.184246 ms
+  Rx Packets: 2489
+ Loss Rate: 0.440000
+
+Flow 5 (7.0.0.6:49153 -> 1.0.0.2:20005) proto UDP
+  Tx Packets: 2500
+  Tx Bytes:   3570000
+  TxOffered:  6.208696 Mbps
+  Rx Bytes:   3554292
+  Throughput: 5.687347 Mbps
+  Mean delay:  5.043842 ms
+  Mean jitter:  0.203768 ms
+  Rx Packets: 2489
+ Loss Rate: 0.440000
+
+
+  Mean flow throughput: 5.687997
+
+
+  Aggregrate throughput: 28.439984
+
+
+  Mean flow delay: 5.125333
+
+
+  Mean packet loss rate(%): 0.440000
+
+  Mean HOL Delay: 2.0868
+
+========================================================================
