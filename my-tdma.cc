@@ -31,8 +31,6 @@
 #include <algorithm>
 #include <functional>
 
-#include"ns3/nr-mac-scheduler-ns3.h"
-
 namespace ns3  {
 
 NS_LOG_COMPONENT_DEFINE ("MyTdma");
@@ -160,6 +158,13 @@ MyTdma::AssignRBGTDMA (uint32_t symAvail, const ActiveUeMap &activeUe,
 
       // Ensure fairness: pass over UEs which already has enough resources to transmit
       // if(SaveTime()==1)
+      // for (auto const &pair: RntiBuffSize) {
+      //   NS_LOG_LOGIC("{" << pair.first << "}");
+      //   RntiBuffSize[pair.first.second.third]=0;
+      // }
+      
+      // if(const_cast<MyTdma*> (this)->RntiBuffSize[GetUe(*schedInfoIt)->m_rnti].second.second == 'B')
+
       while (schedInfoIt != ueVector.end ())
         {
           uint32_t bufQueueSize = schedInfoIt->second;
@@ -173,8 +178,7 @@ MyTdma::AssignRBGTDMA (uint32_t symAvail, const ActiveUeMap &activeUe,
           
           uint16_t currentBufferSize = (uint16_t)bufQueueSize;
           uint8_t currentRnti = (uint8_t)GetUe (*schedInfoIt)->m_rnti;
-          // if(GetUe (*schedInfoIt)->m_macCeType == MacCeElement::BSR)
-          //   NS_LOG_LOGIC("\n\nFUCK\n\n");
+
           NS_LOG_LOGIC ("BSR before pred for UE " << currentRnti << ":" << currentBufferSize << " reported");
           m_bsrDl->SetBsr (currentBufferSize);
           m_bsrDl->SetTarget (currentRnti);          
@@ -406,24 +410,24 @@ MyTdma::CreateUlDci (NrMacSchedulerNs3::PointInFTPlane *spoint,
   return dci;
 }
 
-int
-MyTdma::SaveTime (const NrMacSchedSapProvider::SchedUlMacCtrlInfoReqParameters &params)
-{
-  NS_LOG_FUNCTION (this);
+// int
+// MyTdma::SaveTime (const NrMacSchedSapProvider::SchedUlMacCtrlInfoReqParameters &params)
+// {
+//   NS_LOG_FUNCTION (this);
 
-    for (const auto & element : params.m_macCeList)
-      {
-        // BSR, PHR, CRNTI
-        if ( element.m_macCeType == MacCeElement::BSR )
-          {
-            return 1;
-          }
-        else
-          {
-            return 0
-          }
-      }
-}
+//     for (const auto & element : params.m_macCeList)
+//       {
+//         // BSR, PHR, CRNTI
+//         if ( element.m_macCeType == MacCeElement::BSR )
+//           {
+//             return 1;
+//           }
+//         else
+//           {
+//             return 0;
+//           }
+//       }
+// }
 
 uint8_t
 MyTdma::GetTpc () const

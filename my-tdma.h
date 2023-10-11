@@ -102,7 +102,7 @@ protected:
                uint32_t maxSym) const override;
 
 
-  virtual int SaveTime (const NrMacSchedSapProvider::SchedUlMacCtrlInfoReqParameters& params);
+  // virtual int SaveTime (const NrMacSchedSapProvider::SchedUlMacCtrlInfoReqParameters& params);
   /**
    * \brief Not doing anything, moving forward the spoint is done by CreateDci
    * \param spoint Starting point

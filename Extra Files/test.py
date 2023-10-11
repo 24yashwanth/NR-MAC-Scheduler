@@ -46,11 +46,11 @@ def create_train_model(n_steps, raw_seq):
 	# split into samples
 	X, Y = split_sequence(raw_seq, n_steps)
 	n_features = 1
-	X_train, Y_train, X_test, Y_test = train_test_split(X,Y, 0.03)
+	X_train, Y_train, X_test, Y_test = train_test_split(X,Y, 0)
 
-n_steps = 10 //10,50
+n_steps = 10 #10,50
 X, Y = split_sequence(raw_seq, n_steps)
-X_train, Y_train, X_test, Y_test = train_test_split(X,Y, 0.03)
+X_train, Y_train, X_test, Y_test = train_test_split(X,Y, 0)
 
 class PositionalEncoding(nn.Module):
     def __init__(self, d_model, max_len=5000):
@@ -90,8 +90,8 @@ class TransformerModel(nn.Module):
 
 # Hyperparameters
 input_dim = n_steps  # Input dimension (sequence length)
-num_blocks = 2  # Number of transformer blocks //2,4
-d_model = 64    # Dimension of the model //32,64,128
+num_blocks = 4  # Number of transformer blocks //2,4
+d_model = 128    # Dimension of the model //32,64,128
 num_heads = 4   # Number of attention heads //8,4
 ff_dim = 32     # Dimension of the feedforward network //16,32,64
 dropout_rate = 0.1  # Dropout rate //0.001-0.9
@@ -116,11 +116,11 @@ testing_target_data = torch.tensor(Y_test, dtype=torch.float32)
 criterion = nn.MSELoss()
 
 # Define optimizer (e.g., Adam)
-optimizer = optim.Adam(model.parameters(), lr=0.001) // 0.5,0.1,0.01,0.001
+optimizer = optim.Adam(model.parameters(), lr=0.5) # 0.5,0.1,0.01,0.001
 
 
 # Number of training epochs
-num_epochs = 150 //500, 1000
+num_epochs = 150 #500, 1000
 
 # Training loop
 for epoch in range(num_epochs):
@@ -145,15 +145,16 @@ filename = './model/Transformers_BSR_model.pth'
 torch.save(model.state_dict(), filename)
 
 
-loaded_model = TransformerModel(input_dim=input_dim, nhead=num_heads, d_model=d_model, num_layers=num_blocks, ff_dim=ff_dim, dropout_rate=dropout_rate, output_dim=output_dim)  # Initialize a new instance of your model
-loaded_model.load_state_dict(torch.load('./model/Transformers_BSR_model.pth'))
-loaded_model.eval()
+# loaded_model = TransformerModel(input_dim=input_dim, nhead=num_heads, d_model=d_model, num_layers=num_blocks, ff_dim=ff_dim, dropout_rate=dropout_rate, output_dim=output_dim)  # Initialize a new instance of your model
+# loaded_model.load_state_dict(torch.load('./model/Transformers_BSR_model.pth'))
+# loaded_model.eval()
 
-with torch.no_grad():
-    predictions = loaded_model(testing_input_data)
+# with torch.no_grad():
+#     predictions = loaded_model(testing_input_data)
 
-# Calculate loss (e.g., Mean Squared Error) for regression
-criterion = torch.nn.MSELoss()
-loss = criterion(predictions, testing_target_data)
+# # Calculate loss (e.g., Mean Squared Error) for regression
+# criterion = torch.nn.MSELoss()
+# loss = criterion(predictions, testing_target_data)
 
-print("Test Loss:", loss.item())
+# print("Test Loss:", loss.item())
+print(len(X_train))

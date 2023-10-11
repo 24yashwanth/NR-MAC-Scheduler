@@ -85,23 +85,23 @@ class TransformerModel(nn.Module):
 
 
 
-n_steps = [10,50]
-numberOfEpochs = [150, 200, 500, 1000]
-numberOfBlocks = [2,4]
-dimensionModel = [32, 64, 128]
-numberOfAttentionHeads = [4, 8]
-feedForwardDimension = [16, 32, 64]
-dropOutRate = [0.1, 0.01, 0.02, 0.03, 0.2, 0.4, 0.6, 0.8, 0.9]
-lossRate = [0.5, 0.1, 0.01, 0.001]
+# n_steps = [10,50]
+# numberOfEpochs = [150, 200, 500, 1000]
+# numberOfBlocks = [2,4]
+# dimensionModel = [32, 64, 128]
+# numberOfAttentionHeads = [4, 8]
+# feedForwardDimension = [16, 32, 64]
+# dropOutRate = [0.1, 0.01, 0.02, 0.03, 0.2, 0.4, 0.6, 0.8, 0.9]
+# lossRate = [0.5, 0.1, 0.01, 0.001]
 
-# n_steps = [10]
-# numberOfEpochs = [60]
-# numberOfBlocks = [4]
-# dimensionModel = [128]
-# numberOfAttentionHeads = [4]
-# feedForwardDimension = [32]
-# dropOutRate = [0.01]
-# lossRate = [0.5]
+n_steps = [10]
+numberOfEpochs = [60]
+numberOfBlocks = [4]
+dimensionModel = [128]
+numberOfAttentionHeads = [4]
+feedForwardDimension = [32]
+dropOutRate = [0.01]
+lossRate = [0.5]
 
 for nstep in n_steps:
     for numepochs in numberOfEpochs:
@@ -165,7 +165,9 @@ for nstep in n_steps:
                                     
                                 # plotting the data
                                 plt.figure()
-                                plt.plot(np.array(train_loss_x), np.array(train_loss_y))
+                                plt.plot(np.array(train_loss_x), np.array(train_loss_y), color="red")
+                                # plt.plot(np.array(train_loss_x), np.array(Y_test), color="blue")
+                                
                                     
                                 # Adding the title    
                                 plt.title("Loss Curves")

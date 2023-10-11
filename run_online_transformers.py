@@ -36,14 +36,16 @@ n_steps = 10
 
 # Model is loaded here for predictions 
 filename = './Extra Files/model/Transformers_BSR_model.pth'
+
 # Hyperparameters
 input_dim = n_steps  # Input dimension (sequence length)
-num_blocks = 2  # Number of transformer blocks
-d_model = 64    # Dimension of the model
+num_blocks = 4  # Number of transformer blocks
+d_model = 128    # Dimension of the model
 num_heads = 4   # Number of attention heads
 ff_dim = 32     # Dimension of the feedforward network
-dropout_rate = 0.1  # Dropout rate
+dropout_rate = 0.01  # Dropout rate
 output_dim = 1  # Output dimension (for regression)
+
 class PositionalEncoding(nn.Module):
     def __init__(self, d_model, max_len=5000):
         super(PositionalEncoding, self).__init__()
@@ -132,7 +134,7 @@ bsr_queue = []
 rnti_queue = []
 
 
-// with and without prediction BSR values plot
+# with and without prediction BSR values plot
 
 exp = Experiment(mempool_key, mem_size, 'TRANSFORMERS', '../../')
 exp.run(show_output=1)
@@ -179,9 +181,9 @@ try:
                 pred_val = int(yhat)
 
                 if pred_val < 0 or pred_val < BSR:
-                    data.pred.new_bsr = BSR
+                    data.pred.new_bsr = BSR 
                 else:
-                    data.pred.new_bsr = pred_val
+                    data.pred.new_bsr = pred_val + BSR
 
                 # Remove the first element from the list
                 temp_bsr_queues[RNTI] = temp_bsr_queues[RNTI][1:]
@@ -203,7 +205,12 @@ print('Finish')
 
 # -------------------------------------------------------------------------------------------------------
 
+# (BSR + PREDICTED BSR)
 
+#  if pred_val < 0 or pred_val < BSR:
+#                     data.pred.new_bsr = BSR + pred_val
+#                 else:
+#                     data.pred.new_bsr = pred_val + BSR
 
 
 
