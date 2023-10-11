@@ -160,7 +160,7 @@ MyTdma::AssignRBGTDMA (uint32_t symAvail, const ActiveUeMap &activeUe,
       // if(SaveTime()==1)
       // for (auto const &pair: RntiBuffSize) {
       //   NS_LOG_LOGIC("{" << pair.first << "}");
-      //   RntiBuffSize[pair.first.second.third]=0;
+      //   RntiBuffSize[pair].first.second.first=0;
       // }
       
       // if(const_cast<MyTdma*> (this)->RntiBuffSize[GetUe(*schedInfoIt)->m_rnti].second.second == 'B')
@@ -181,11 +181,28 @@ MyTdma::AssignRBGTDMA (uint32_t symAvail, const ActiveUeMap &activeUe,
 
           NS_LOG_LOGIC ("BSR before pred for UE " << currentRnti << ":" << currentBufferSize << " reported");
           m_bsrDl->SetBsr (currentBufferSize);
-          m_bsrDl->SetTarget (currentRnti);          
+          m_bsrDl->SetTarget (currentRnti);
+          
+          // uint16_t receivedBufferSize;
+          // if(const_cast<MyTdma*> (this)->RntiBuffSize[GetUe(*schedInfoIt)->m_rnti].second.second == 'B' && const_cast<MyTdma*> (this)->RntiBuffSize[GetUe(*schedInfoIt)->m_rnti].second.first != 1)
+          // {
+          //   receivedBufferSize = m_bsrDl->GetBsr ();
+          //   const_cast<MyTdma*> (this)->RntiBuffSize[GetUe(*schedInfoIt)->m_rnti].second.first = 1;
+          //   NS_LOG_LOGIC ("BSR after pred for UE " << currentRnti << ":" << receivedBufferSize << " reported");
+          // }
+          // else
+          // {
+          //   receivedBufferSize=currentBufferSize;
+          // }
+
+
           uint16_t receivedBufferSize = m_bsrDl->GetBsr ();
+          // const_cast<MyTdma*> (this)->RntiBuffSize[GetUe(*schedInfoIt)->m_rnti].second.first = 1;
+          NS_LOG_LOGIC ("BSR after pred for UE " << currentRnti << ":" << receivedBufferSize << " reported");
+            
+          
           schedInfoIt->second=receivedBufferSize;
           bufQueueSize=receivedBufferSize;
-          NS_LOG_LOGIC ("BSR after pred for UE " << currentRnti << ":" << receivedBufferSize << " reported");
           // -----------------------------------------------------------------------------------------------
 
           if (GetTBSFn (GetUe (*schedInfoIt)) >= std::max (bufQueueSize, 7U))

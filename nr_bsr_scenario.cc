@@ -98,7 +98,7 @@ int main (int argc, char *argv[]){
     bool logging=true;
 
     // set simulation time and mobility
-    double simTime=1;//seconds
+    double simTime=0.03;//seconds
     double udpAppStartTime = 0.4; //seconds
 
     //other simulation parameters default values
