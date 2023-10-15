@@ -188,6 +188,21 @@ try:
                 # Remove the first element from the list
                 temp_bsr_queues[RNTI] = temp_bsr_queues[RNTI][1:]
 
+                file1 = open("predictedBSR.txt" , "a" )
+                file1.write("{}\n".format(pred_val) )
+                file1.close()
+
+                file2 = open("predictedFeedbackBSR.txt" , "a" )
+                file2.write("{}\n".format(pred_val + BSR) )
+                file2.close()
+
+                file3 = open("originalBSR.txt" , "a" )
+                file3.write("{}\n".format(BSR) )
+                file3.close()
+
+
+
+
 
 
 

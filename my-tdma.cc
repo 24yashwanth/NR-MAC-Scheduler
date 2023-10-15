@@ -168,7 +168,6 @@ MyTdma::AssignRBGTDMA (uint32_t symAvail, const ActiveUeMap &activeUe,
       while (schedInfoIt != ueVector.end ())
         {
           uint32_t bufQueueSize = schedInfoIt->second;
-          
           // -----------------------------------------------------------------------------------------------
           // This portion has been added to the original codebase
           // Here we store the bufQueueSize type casted into a uint16_t currentBufferSize variable to use it further for shared memory transactions
@@ -178,31 +177,31 @@ MyTdma::AssignRBGTDMA (uint32_t symAvail, const ActiveUeMap &activeUe,
           
           uint16_t currentBufferSize = (uint16_t)bufQueueSize;
           uint8_t currentRnti = (uint8_t)GetUe (*schedInfoIt)->m_rnti;
-
           NS_LOG_LOGIC ("BSR before pred for UE " << currentRnti << ":" << currentBufferSize << " reported");
           m_bsrDl->SetBsr (currentBufferSize);
           m_bsrDl->SetTarget (currentRnti);
-          
-          // uint16_t receivedBufferSize;
-          // if(const_cast<MyTdma*> (this)->RntiBuffSize[GetUe(*schedInfoIt)->m_rnti].second.second == 'B' && const_cast<MyTdma*> (this)->RntiBuffSize[GetUe(*schedInfoIt)->m_rnti].second.first != 1)
-          // {
-          //   receivedBufferSize = m_bsrDl->GetBsr ();
-          //   const_cast<MyTdma*> (this)->RntiBuffSize[GetUe(*schedInfoIt)->m_rnti].second.first = 1;
-          //   NS_LOG_LOGIC ("BSR after pred for UE " << currentRnti << ":" << receivedBufferSize << " reported");
-          // }
-          // else
-          // {
-          //   receivedBufferSize=currentBufferSize;
-          // }
-
-
-          uint16_t receivedBufferSize = m_bsrDl->GetBsr ();
-          // const_cast<MyTdma*> (this)->RntiBuffSize[GetUe(*schedInfoIt)->m_rnti].second.first = 1;
-          NS_LOG_LOGIC ("BSR after pred for UE " << currentRnti << ":" << receivedBufferSize << " reported");
+          uint16_t receivedBufferSize;
+          if( const_cast<MyTdma*> (this)->RntiBuffSize[GetUe(*schedInfoIt)->m_rnti].second.first==0 && const_cast<MyTdma*> (this)->RntiBuffSize[GetUe(*schedInfoIt)->m_rnti].second.second=='B' )          
+          {
+            receivedBufferSize = m_bsrDl->GetBsr ();
+            const_cast<MyTdma*> (this)->RntiBuffSize[GetUe(*schedInfoIt)->m_rnti].second.first = 1;
+            NS_LOG_LOGIC ("BSR after pred for UE " << currentRnti << ":" << receivedBufferSize << " reported");
+          }
             
+          else
+            receivedBufferSize = currentBufferSize;
           
           schedInfoIt->second=receivedBufferSize;
           bufQueueSize=receivedBufferSize;
+          // NS_LOG_LOGIC ("BSR after pred for UE " << currentRnti << ":" << receivedBufferSize << " reported");
+
+
+          // uint16_t receivedBufferSize = m_bsrDl->GetBsr ();
+          // // const_cast<MyTdma*> (this)->RntiBuffSize[GetUe(*schedInfoIt)->m_rnti].second.first = 1;
+          // NS_LOG_LOGIC ("BSR after pred for UE " << currentRnti << ":" << receivedBufferSize << " reported");
+            
+          
+          
           // -----------------------------------------------------------------------------------------------
 
           if (GetTBSFn (GetUe (*schedInfoIt)) >= std::max (bufQueueSize, 7U))
