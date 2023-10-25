@@ -6,7 +6,7 @@ import pickle
 
 import logging
 import time
-
+import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -421,8 +421,8 @@ def do_testing():
 # model.fit(X, Y, epochs=200, verbose=0)
 
 
-sample_ca = CrossAttention(num_heads=2, key_dim=512)
+# sample_ca = CrossAttention(num_heads=2, key_dim=512)
 
-print(pt_emb.shape)
-print(en_emb.shape)
-print(sample_ca(en_emb, pt_emb).shape)
+# print(pt_emb.shape)
+# print(en_emb.shape)
+# print(sample_ca(en_emb, pt_emb).shape)

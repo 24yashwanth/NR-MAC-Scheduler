@@ -150,6 +150,7 @@ try:
             bsr_queue.append(BSR)
             rnti_queue.append(RNTI)
 
+            pred_val = 0
             # ------------------------------------------
             
             # Here we check the RNTI and accordingly perform the required operations
@@ -178,7 +179,7 @@ try:
                 with torch.no_grad():
                     input = torch.tensor(x_input, dtype=torch.float32)
                     yhat = model(input)
-                pred_val = int(yhat)
+                    pred_val = int(yhat)
 
                 if pred_val < 0 or pred_val < BSR:
                     data.pred.new_bsr = BSR 
@@ -188,15 +189,29 @@ try:
                 # Remove the first element from the list
                 temp_bsr_queues[RNTI] = temp_bsr_queues[RNTI][1:]
 
-                file1 = open("predictedBSR.txt" , "a" )
+                file1 = open("./logs/{}_predictedBSR.txt".format(RNTI) , "a" )
                 file1.write("{}\n".format(pred_val) )
                 file1.close()
 
-                file2 = open("predictedFeedbackBSR.txt" , "a" )
+                file2 = open("./logs/{}_predictedFeedbackBSR.txt".format(RNTI) , "a" )
                 file2.write("{}\n".format(pred_val + BSR) )
                 file2.close()
 
-                file3 = open("originalBSR.txt" , "a" )
+                file3 = open("./logs/{}_originalBSR.txt".format(RNTI) , "a" )
+                file3.write("{}\n".format(BSR) )
+                file3.close()
+
+
+
+                file1 = open("./logs/predictedBSR.txt" , "a" )
+                file1.write("{}\n".format(pred_val) )
+                file1.close()
+
+                file2 = open("./logs/predictedFeedbackBSR.txt" , "a" )
+                file2.write("{}\n".format(pred_val + BSR) )
+                file2.close()
+
+                file3 = open("./logs/originalBSR.txt" , "a" )
                 file3.write("{}\n".format(BSR) )
                 file3.close()
 

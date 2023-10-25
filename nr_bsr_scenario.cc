@@ -109,7 +109,7 @@ int main (int argc, char *argv[]){
     //uint32_t PacketSize = 1000;
 
     uint16_t gNbNum = 1; //according to given topology configurations
-    uint16_t ueNumPergNb = 5; //according to given topology configurations
+    uint16_t ueNumPergNb = 11; //according to given topology configurations
     uint16_t numBearersPerUe=1;
     double centralFrequency = 6e9; //according to given topology configurations
     double bandwidth = 10e6; //according to given topology configurations
@@ -204,10 +204,10 @@ int main (int argc, char *argv[]){
         LogComponentEnable ("NrUeMac", logLevel1);  //keep
 
 
-        LogComponentEnable ("MyTdmaPF", logLevel1);
-        LogComponentEnable ("MyTdmaRR", logLevel1);
-        LogComponentEnable ("MyTdma", logLevel1);
-        LogComponentEnable ("NrMacSchedulerNs3", logLevel1);
+        // LogComponentEnable ("MyTdmaPF", logLevel1);
+        // LogComponentEnable ("MyTdmaRR", logLevel1);
+        // LogComponentEnable ("MyTdma", logLevel1);
+        // LogComponentEnable ("NrMacSchedulerNs3", logLevel1);
 
     }
 
