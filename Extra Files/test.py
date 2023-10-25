@@ -5,6 +5,7 @@ from numpy import array
 import torch.optim as optim
 
 import math
+import matplotlib.pyplot as plt
 
 
 # n_steps = [10,50]
@@ -97,6 +98,7 @@ ff_dim = 32     # Dimension of the feedforward network //16,32,64
 dropout_rate = 0.1  # Dropout rate //0.001-0.9
 output_dim = 1  # Output dimension (for regression)
 
+learningRate=0.5
 # Create the Transformer model
 model = TransformerModel(input_dim=input_dim, nhead=num_heads, d_model=d_model, num_layers=num_blocks, ff_dim=ff_dim, dropout_rate=dropout_rate, output_dim=output_dim)
 # model.float()  # Ensure the model is in float mode
@@ -116,11 +118,15 @@ testing_target_data = torch.tensor(Y_test, dtype=torch.float32)
 criterion = nn.MSELoss()
 
 # Define optimizer (e.g., Adam)
-optimizer = optim.Adam(model.parameters(), lr=0.5) # 0.5,0.1,0.01,0.001
+optimizer = optim.Adam(model.parameters(), lr=learningRate) # 0.5,0.1,0.01,0.001
 
 
 # Number of training epochs
 num_epochs = 150 #500, 1000
+
+
+train_loss_y=[]
+train_loss_x=[]
 
 # Training loop
 for epoch in range(num_epochs):
@@ -139,22 +145,25 @@ for epoch in range(num_epochs):
 
     # Print training progress
     print(f'Epoch [{epoch + 1}/{num_epochs}], Loss: {loss.item():.4f}')
+    # Plotting training progress
+    train_loss_y.append(loss.item())
+    train_loss_x.append(epoch + 1)
+
+
+# plotting the data
+plt.figure()
+plt.plot(np.array(train_loss_x), np.array(train_loss_y), color="red")
+
+# Adding the title    
+plt.title("Loss Curves")
+                          
+# Adding the labels
+plt.ylabel("Loss")
+plt.xlabel("Epochs")
+plt.figtext(.4, .4, '''n_steps={}\nnum_epochs={}\nnum_blocks={}\nd_model={}\nnum_heads={}\nff_dim={}\ndropout_rate={}\nlr={}'''.format(n_steps, num_epochs, num_blocks, d_model, num_heads, ff_dim, dropout_rate, learningRate) )
+# Saving the plot
+plt.savefig('''./model/n_steps={},num_epochs={}, num_blocks={}, d_model={}, num_heads={}, ff_dim={}, dropout_rate={}, lr={}.png'''.format(n_steps, num_epochs, num_blocks, d_model, num_heads, ff_dim, dropout_rate, learningRate))
 
 filename = './model/Transformers_BSR_model.pth'
 # After training, Saving the model
 torch.save(model.state_dict(), filename)
-
-
-# loaded_model = TransformerModel(input_dim=input_dim, nhead=num_heads, d_model=d_model, num_layers=num_blocks, ff_dim=ff_dim, dropout_rate=dropout_rate, output_dim=output_dim)  # Initialize a new instance of your model
-# loaded_model.load_state_dict(torch.load('./model/Transformers_BSR_model.pth'))
-# loaded_model.eval()
-
-# with torch.no_grad():
-#     predictions = loaded_model(testing_input_data)
-
-# # Calculate loss (e.g., Mean Squared Error) for regression
-# criterion = torch.nn.MSELoss()
-# loss = criterion(predictions, testing_target_data)
-
-# print("Test Loss:", loss.item())
-print(len(X_train))
